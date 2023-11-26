@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import CategoryPage from './components/CategoryPage';
+import DifficultyPage from './components/DifficultyPage';
+import QuestionPage from './components/QuestionPage';
+import CompletionPage from './components/CompletionPage'; // Import the completion page component
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<CategoryPage />} />
+          <Route path="/questions/:categoryId" element={<DifficultyPage />} />
+          <Route path="/questions/:categoryId/:difficulty" element={<QuestionPage />} />
+          <Route path="/questions/:categoryId/:difficulty/complete" element={<CompletionPage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
+
