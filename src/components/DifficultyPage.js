@@ -6,13 +6,19 @@ const DifficultyPage = () => {
   const { categoryId } = useParams();
 
   return (
-    <div>
-      <h2>Select Difficulty</h2>
-      <ul>
-        <li><Link to={`/questions/${categoryId}/easy`}>Easy</Link></li>
-        <li><Link to={`/questions/${categoryId}/medium`}>Medium</Link></li>
-        <li><Link to={`/questions/${categoryId}/hard`}>Hard</Link></li>
-      </ul>
+    <div className="category-grid difficulty-grid">
+      <h2 className="category-heading">Select Difficulty</h2>
+      <div className="category-buttons difficulty-buttons">
+        <Link to={`/questions/${categoryId}/easy`} className="category-button">
+          Easy
+        </Link>
+        <Link to={`/questions/${categoryId}/medium`} className="category-button">
+          Medium
+        </Link>
+        <Link to={`/questions/${categoryId}/hard`} className="category-button">
+          Hard
+        </Link>
+      </div>
     </div>
   );
 };

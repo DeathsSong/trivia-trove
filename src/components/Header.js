@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header>
-      <h1>Trivia Trove</h1>
-      {/* Add navigation links, logo, or other header content */}
+    <header className="header">
+      <h1>
+        <Link to="/">Trivia Trove</Link>
+      </h1>
     </header>
   );
 };
