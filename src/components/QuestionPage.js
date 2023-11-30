@@ -9,7 +9,8 @@ const QuestionPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [questionResults, setQuestionResults] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const shuffleAnswers = (answers) => {
@@ -22,72 +23,99 @@ const QuestionPage = () => {
   };
 
   const handleAnswerSelect = (answerText) => {
-    setSelectedAnswer(answerText);
+    if (selectedAnswer === null && !loading) {
+      setSelectedAnswer(answerText);
+    }
   };
-
+  
   const handleNextQuestion = () => {
-    if (selectedAnswer === questions[currentQuestionIndex].correct_answer) {
-      setScore(score + 1);
+    const isCorrect = selectedAnswer === currentQuestion.correct_answer;
+  
+    const result = {
+      question: currentQuestion.question,
+      selectedAnswer,
+      correctAnswer: currentQuestion.correct_answer,
+      isCorrect,
+    };
+  
+    setQuestionResults((prevResults) => [...prevResults, result]);
+  
+    if (isCorrect) {
+      setScore((prevScore) => prevScore + 1);
       console.log('Score updated:', score + 1);
     }
-
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedAnswer(null);
-    } else {
+  
+    if (currentQuestionIndex === questions.length - 1) {
       console.log('Navigating to CompletionPage with score:', score + 1);
-      navigate(`/questions/${categoryId}/${difficulty}/complete`, { state: { score: score + 1 } });
+      console.log('Total Questions:', questions.length);
+      navigate(`/questions/${categoryId}/${difficulty}/complete`, {
+        state: { score: score + 1, questionResults },
+      });
+    } else {
+      console.log('Moving to the next question...');
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setSelectedAnswer(null);
     }
   };
+  
+  
+  
+  
+  
+  // Add the following useEffect to handle navigation
+  useEffect(() => {
+    if (currentQuestionIndex === questions.length - 1) {
+      console.log('Navigating to CompletionPage with score:', score);
+      console.log('Total Questions:', questions.length);
+      navigate(`/questions/${categoryId}/${difficulty}/complete`, {
+        state: { score, questionResults },
+      });
+    }
+  }, [currentQuestionIndex, questions.length, categoryId, difficulty, score, questionResults]);
+  
+  
+  
+  
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const fetchQuestions = async () => {
     try {
-      // Make the first API call for true/false questions
-      const trueFalseResponse = await axios.get('https://opentdb.com/api.php', {
+      const response = await axios.get('https://opentdb.com/api.php', {
         params: {
-          amount: 5,
+          amount: 11, // Fetch 11 questions to include the dummy question
           category: categoryId,
           difficulty: difficulty,
-          type: 'boolean',
         },
       });
   
-      // Wait for a delay (e.g., 5 seconds)
-      await delay(5000);
+      const combinedQuestions = response.data.results;
   
-      // Make the second API call for multiple-choice questions
-      const multipleChoiceResponse = await axios.get('https://opentdb.com/api.php', {
-        params: {
-          amount: 5,
-          category: categoryId,
-          difficulty: difficulty,
-          type: 'multiple',
-        },
-      });
-  
-      // Combine the results into a single array
-      const combinedQuestions = [
-        ...trueFalseResponse.data.results,
-        ...multipleChoiceResponse.data.results,
-      ];
-  
-      // Shuffle the combined array
       const shuffledQuestions = shuffleAnswers(combinedQuestions);
   
-      // Shuffle the answers for each question
-      const questionsWithShuffledAnswers = shuffledQuestions.map((question) => ({
-        ...question,
-        answers: shuffleAnswers([...question.incorrect_answers, question.correct_answer]),
-      }));
+      const questionsWithShuffledAnswers = shuffledQuestions.map((question) => {
+        let answers;
+  
+        if (question.type === 'multiple') {
+          answers = shuffleAnswers([...question.incorrect_answers, question.correct_answer]);
+        } else if (question.type === 'boolean') {
+          answers = shuffleAnswers(['True', 'False']);
+        }
+  
+        return {
+          ...question,
+          answers: answers,
+        };
+      });
   
       setQuestions(questionsWithShuffledAnswers);
-      setLoading(false); // Set loading to false once questions are fetched
+      setLoading(false);
     } catch (error) {
-      // console.error('Error fetching questions:', error);
+      console.error('Error fetching questions:', error);
     }
   };
+  
+  
   
 
   useEffect(() => {
@@ -96,54 +124,66 @@ const QuestionPage = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
 
-  console.log('Current Score:', score);
+  const isCorrectAnswer = (answer) => {
+    return answer === currentQuestion.correct_answer;
+  };
 
   return (
     <div className="question-page">
-      {loading && (
-  <p className="loading-dots"></p>
-)}
-
+      {loading && <p className="loading-dots"></p>}
+  
       {!loading && currentQuestion && (
         <div>
           <p className="question-text" dangerouslySetInnerHTML={{ __html: currentQuestion.question }} />
-
+  
           {currentQuestion.type === 'multiple' && (
             <div className="answers-grid">
-              {currentQuestion.answers.map((answer, index) => (
+              {currentQuestion.answers && currentQuestion.answers.map((answer, index) => (
                 <button
                   key={index}
-                  className="answer-button"
+                  className={`answer-button ${
+                    selectedAnswer === answer && !loading
+                      ? isCorrectAnswer(answer)
+                        ? 'selected-answer'
+                        : 'incorrect-answer'
+                      : ''
+                  }`}
                   onClick={() => handleAnswerSelect(answer)}
-                  disabled={selectedAnswer !== null}
+                  disabled={selectedAnswer !== null || loading}
                 >
                   <span dangerouslySetInnerHTML={{ __html: answer }} />
                 </button>
               ))}
             </div>
           )}
-
-{currentQuestion.type === 'boolean' && (
-  <div className="boolean-answers">
-    {currentQuestion.answers.map((answer, index) => (
-      <button
-        key={index}
-        className="boolean-answer-button"
-        onClick={() => handleAnswerSelect(answer)}
-        disabled={selectedAnswer !== null}
-      >
-        {answer}
-      </button>
-    ))}
-  </div>
-)}
-
-<p className="score">Score: {score}/10</p>
-<div className="button-container">
-  <button className="next-button" onClick={handleNextQuestion} disabled={selectedAnswer === null}>
-    Next Question
-  </button>
-</div>
+  
+          {currentQuestion.type === 'boolean' && (
+            <div className="boolean-answers">
+              {currentQuestion.answers && currentQuestion.answers.map((answer, index) => (
+                <button
+                  key={index}
+                  className={`boolean-answer-button ${
+                    selectedAnswer === answer && !loading
+                      ? isCorrectAnswer(answer)
+                        ? 'selected-answer'
+                        : 'incorrect-answer'
+                      : ''
+                  }`}
+                  onClick={() => handleAnswerSelect(answer)}
+                  disabled={selectedAnswer !== null || loading}
+                >
+                  {answer}
+                </button>
+              ))}
+            </div>
+          )}
+  
+          <p className="score">Score: {score}/10</p>
+          <div className="button-container">
+            <button className="next-button" onClick={handleNextQuestion} disabled={selectedAnswer === null}>
+              Next Question
+            </button>
+          </div>
         </div>
       )}
     </div>

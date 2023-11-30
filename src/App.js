@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import CategoryPage from './components/CategoryPage';
 import DifficultyPage from './components/DifficultyPage';
 import QuestionPage from './components/QuestionPage';
-import CompletionPage from './components/CompletionPage'; // Import the completion page component
+import CompletionPage from './components/CompletionPage';
 
 const App = () => {
   return (

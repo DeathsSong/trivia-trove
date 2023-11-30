@@ -15,7 +15,12 @@ const CategoryPage = () => {
         const data = await response.json();
 
         // Filter out the specified category IDs
-        const filteredCategories = data.trivia_categories.filter(category => !excludedCategoryIds.includes(category.id));
+        const filteredCategories = data.trivia_categories
+          .filter(category => !excludedCategoryIds.includes(category.id))
+          .map(category => ({
+            id: category.id,
+            name: category.name.replace(/^Entertainment: /, '') // Remove the "Entertainment: " prefix
+          }));
 
         setCategories(filteredCategories);
       } catch (error) {

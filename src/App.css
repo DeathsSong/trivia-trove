@@ -112,7 +112,7 @@ header a {
 }
 
 .category-button {
-  flex: 0 0 calc(33.3333% - 16px); /* 3 columns, adjust as needed */
+  flex: 0 0 calc(33.3333% - 16px); /* 3 columns for larger screens */
   box-sizing: border-box;
   padding: 12px;
   text-align: center;
@@ -124,7 +124,7 @@ header a {
   transition: background-color 0.3s ease;
   font-size: 19px;
   font-weight: bold;
-  margin: 8px; /* Add margin to create space between buttons */
+  margin: 8px;
 }
 
 @media (max-width: 768px) {
@@ -217,6 +217,12 @@ header a {
   font-size: 30px;
   font-weight: bold;
   flex: 0 0 calc(50% - 16px); /* Set width for two buttons in a row with gap */
+  cursor: pointer;
+
+  /* Add a media query for smaller screens (adjust max-width as needed) */
+  @media (max-width: 768px) {
+    flex: 0 0 calc(100% - 16px); /* Set width for one button per row */
+  }
 }
 
 .answer-button:hover {
@@ -246,6 +252,7 @@ header a {
   width: 200px;
   font-size: 30px;
   margin: 10px;
+  cursor: pointer;
 }
 
 .boolean-answer-button:hover {
@@ -273,6 +280,7 @@ header a {
   font-size: 20px; /* Adjust as needed */
   font-weight: bold;
   margin-top: 20px; /* Add space between the score and the button */
+  cursor: pointer;
 }
 
 .next-button:hover {
@@ -317,14 +325,96 @@ header a {
   animation: loadingAnimation 1.5s infinite;
 }
 
-
-
-
-
-.correct-answer {
-  background-color: lightblue;
+.selected-answer {
+  background-color: rgb(173, 253, 179);
+  color: green;
 }
 
-.selected-answer {
-  background-color: red;
+.incorrect-answer {
+  background-color: #ff7171; /* Light red background color for incorrect answers */
+  color: #990000; /* Dark red text color for incorrect answers */
+}
+
+
+
+/* ------------------------------ Completion Page ------------------------------ */
+.completion-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -85px;
+  min-height: 100vh; /* Ensure the completion page takes at least the full viewport height */
+  margin-bottom: 60px; /* Adjust this value as needed to create space for the footer */
+  overflow-y: auto; /* Enable vertical scrolling if the content overflows */
+}
+
+.completion-text {
+  text-align: center;
+  font-family: 'Agbalumo';
+  color: rgba(56, 32, 0, 0.666);
+  font-size: 50px;
+  margin-bottom: 16px;
+  position: absolute;
+  top: 140px;
+}
+
+.score-summary {
+  text-align: center;
+  font-family: 'Agbalumo';
+  color: rgba(56, 32, 0, 0.666);
+  font-size: 30px; 
+  margin-bottom: 20px;
+  position: absolute;
+  top: 250px;
+}
+
+.total-score {
+  text-align: center;
+  font-family: 'Agbalumo';
+  color: rgba(56, 32, 0, 0.666);
+  font-size: 30px;
+  margin-top: 20px; /* Add space between the questions and the total score */
+}
+
+.incorrect-questions-heading {
+  text-align: center;
+  font-family: 'Agbalumo';
+  color: rgba(56, 32, 0, 0.666);
+  font-size: 20px;
+  margin-top: 70px; /* Adjust the top margin */
+}
+
+.incorrect-question-list {
+  margin-top: 20px; /* Adjust the top margin */
+}
+
+.play-again-button {
+  box-sizing: border-box;
+  padding: 12px;
+  text-align: center;
+  background-color: lightblue;
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  font-size: 20px; 
+  font-weight: bold;
+  margin-top: 20px; /* Add space between the total score and the button */
+  cursor: pointer;
+}
+
+.play-again-button:hover {
+  background-color: lightcyan;
+}
+
+@media (max-width: 768px) {
+  .incorrect-questions-heading {
+    margin-top: 100px;
+  }
+  
+  .play-again-button {
+    margin-top: 20px; /* Add space between the questions and the button on smaller screens */
+  }
 }
