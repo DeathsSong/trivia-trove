@@ -24,8 +24,6 @@ const CategoryPage = () => {
 
         setCategories(filteredCategories);
       } catch (error) {
-        console.error('Error fetching categories:', error);
-        // Render an error message or handle the error as needed
       }
     };
 

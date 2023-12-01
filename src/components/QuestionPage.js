@@ -42,17 +42,13 @@ const QuestionPage = () => {
   
     if (isCorrect) {
       setScore((prevScore) => prevScore + 1);
-      console.log('Score updated:', score + 1);
     }
   
     if (currentQuestionIndex === questions.length - 1) {
-      console.log('Navigating to CompletionPage with score:', score + 1);
-      console.log('Total Questions:', questions.length);
       navigate(`/questions/${categoryId}/${difficulty}/complete`, {
         state: { score: score + 1, questionResults },
       });
     } else {
-      console.log('Moving to the next question...');
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setSelectedAnswer(null);
     }
@@ -65,8 +61,6 @@ const QuestionPage = () => {
   // Add the following useEffect to handle navigation
   useEffect(() => {
     if (currentQuestionIndex === questions.length - 1) {
-      console.log('Navigating to CompletionPage with score:', score);
-      console.log('Total Questions:', questions.length);
       navigate(`/questions/${categoryId}/${difficulty}/complete`, {
         state: { score, questionResults },
       });
@@ -111,7 +105,6 @@ const QuestionPage = () => {
       setQuestions(questionsWithShuffledAnswers);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching questions:', error);
     }
   };
   

@@ -112,6 +112,7 @@ header a {
 }
 
 .category-button {
+  font-family: Kodchasan;
   flex: 0 0 calc(33.3333% - 16px); /* 3 columns for larger screens */
   box-sizing: border-box;
   padding: 12px;
@@ -151,6 +152,7 @@ header a {
 }
 
 .difficulty-buttons .category-button {
+  font-family: Kodchasan;
   width: 100%;
   box-sizing: border-box;
   padding: 12px;
@@ -205,6 +207,7 @@ header a {
 }
 
 .answer-button {
+  font-family: Kodchasan;
   box-sizing: border-box;
   padding: 12px;
   text-align: center;
@@ -238,6 +241,7 @@ header a {
 }
 
 .boolean-answer-button {
+  font-family: Kodchasan;
   box-sizing: border-box;
   padding: 12px;
   text-align: center;
@@ -268,6 +272,7 @@ header a {
 }
 
 .next-button {
+  font-family: Kodchasan;
   box-sizing: border-box;
   padding: 12px;
   text-align: center;
@@ -343,53 +348,31 @@ header a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: -85px;
-  min-height: 100vh; /* Ensure the completion page takes at least the full viewport height */
-  margin-bottom: 60px; /* Adjust this value as needed to create space for the footer */
-  overflow-y: auto; /* Enable vertical scrolling if the content overflows */
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.information-container {
+  text-align: center;
+  margin-top: -415px; /* Adjust as needed */
 }
 
 .completion-text {
-  text-align: center;
   font-family: 'Agbalumo';
   color: rgba(56, 32, 0, 0.666);
   font-size: 50px;
   margin-bottom: 16px;
-  position: absolute;
-  top: 140px;
 }
 
 .score-summary {
-  text-align: center;
-  font-family: 'Agbalumo';
-  color: rgba(56, 32, 0, 0.666);
-  font-size: 30px; 
-  margin-bottom: 20px;
-  position: absolute;
-  top: 250px;
-}
-
-.total-score {
-  text-align: center;
   font-family: 'Agbalumo';
   color: rgba(56, 32, 0, 0.666);
   font-size: 30px;
-  margin-top: 20px; /* Add space between the questions and the total score */
+  margin-bottom: 20px;
 }
 
-.incorrect-questions-heading {
-  text-align: center;
-  font-family: 'Agbalumo';
-  color: rgba(56, 32, 0, 0.666);
-  font-size: 20px;
-  margin-top: 70px; /* Adjust the top margin */
-}
-
-.incorrect-question-list {
-  margin-top: 20px; /* Adjust the top margin */
-}
-
-.play-again-button {
+.show-modal-button {
+  font-family: Kodchasan;
   box-sizing: border-box;
   padding: 12px;
   text-align: center;
@@ -399,9 +382,30 @@ header a {
   border: 1px solid #ddd;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-  font-size: 20px; 
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 20px; /* Add space between the total score and the button */
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.show-modal-button:hover {
+  background-color: lightcyan;
+}
+
+.play-again-button {
+  font-family: Kodchasan;
+  box-sizing: border-box;
+  padding: 12px;
+  text-align: center;
+  background-color: lightblue;
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
   cursor: pointer;
 }
 
@@ -409,12 +413,66 @@ header a {
   background-color: lightcyan;
 }
 
-@media (max-width: 768px) {
-  .incorrect-questions-heading {
-    margin-top: 100px;
-  }
-  
-  .play-again-button {
-    margin-top: 20px; /* Add space between the questions and the button on smaller screens */
-  }
+.incorrect-questions-heading {
+  font-family: 'Agbalumo';
+  color: rgba(56, 32, 0, 0.666);
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+/* ------------------------------ Incorrect Questions Modal ------------------------------ */
+.incorrect-questions-modal {
+  display: block; /* or any other property to make it visible */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  font-family: Kodchasan;
+  background: linear-gradient(to left, rgb(245, 239, 54) 35%, rgb(218, 136, 250) 100%);
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 10%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.show-modal-button {
+  box-sizing: border-box;
+  padding: 12px;
+  text-align: center;
+  background-color: lightblue;
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.show-modal-button:hover {
+  background-color: lightcyan;
 }
