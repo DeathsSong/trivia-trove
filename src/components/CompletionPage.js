@@ -64,7 +64,7 @@ const CompletionPage = () => {
     </div>
   </div>
 
-      <button className="play-again-button" onClick={() => navigate('/')}>
+      <button className="play-again-button" onClick={() => navigate('/trivia-trove')}>
         Play Again
       </button>
 

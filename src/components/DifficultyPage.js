@@ -9,13 +9,13 @@ const DifficultyPage = () => {
     <div className="category-grid difficulty-grid">
       <h2 className="category-heading">Select Difficulty</h2>
       <div className="category-buttons difficulty-buttons">
-        <Link to={`/questions/${categoryId}/easy`} className="category-button">
+        <Link to={`/trivia-trove/questions/${categoryId}/easy`} className="category-button">
           Easy
         </Link>
-        <Link to={`/questions/${categoryId}/medium`} className="category-button">
+        <Link to={`/trivia-trove/questions/${categoryId}/medium`} className="category-button">
           Medium
         </Link>
-        <Link to={`/questions/${categoryId}/hard`} className="category-button">
+        <Link to={`/trivia-trove/questions/${categoryId}/hard`} className="category-button">
           Hard
         </Link>
       </div>

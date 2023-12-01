@@ -38,7 +38,7 @@ const CategoryPage = () => {
       ) : (
         <div className="category-buttons">
           {categories.map((category) => (
-            <Link key={category.id} to={`/questions/${category.id}`} className="category-button">
+            <Link key={category.id} to={`/trivia-trove/questions/${category.id}`} className="category-button">
               {category.name}
             </Link>
           ))}

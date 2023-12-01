@@ -45,7 +45,7 @@ const QuestionPage = () => {
     }
   
     if (currentQuestionIndex === questions.length - 1) {
-      navigate(`/questions/${categoryId}/${difficulty}/complete`, {
+      navigate(`/trivia-trove/questions/${categoryId}/${difficulty}/complete`, {
         state: { score: score + 1, questionResults },
       });
     } else {
@@ -61,7 +61,7 @@ const QuestionPage = () => {
   // Add the following useEffect to handle navigation
   useEffect(() => {
     if (currentQuestionIndex === questions.length - 1) {
-      navigate(`/questions/${categoryId}/${difficulty}/complete`, {
+      navigate(`/trivia-trove/questions/${categoryId}/${difficulty}/complete`, {
         state: { score, questionResults },
       });
     }

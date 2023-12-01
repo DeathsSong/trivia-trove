@@ -15,10 +15,10 @@ const App = () => {
       <div>
         <Header />
         <Routes>
-          <Route path="/" element={<CategoryPage />} />
-          <Route path="/questions/:categoryId" element={<DifficultyPage />} />
-          <Route path="/questions/:categoryId/:difficulty" element={<QuestionPage />} />
-          <Route path="/questions/:categoryId/:difficulty/complete" element={<CompletionPage />} />
+          <Route path="/trivia-trove" element={<CategoryPage />} />
+          <Route path="/trivia-trove/questions/:categoryId" element={<DifficultyPage />} />
+          <Route path="/trivia-trove/questions/:categoryId/:difficulty" element={<QuestionPage />} />
+          <Route path="/trivia-trove/questions/:categoryId/:difficulty/complete" element={<CompletionPage />} />
         </Routes>
         <Footer />
       </div>
@@ -27,4 +27,3 @@ const App = () => {
 };
 
 export default App;
-
