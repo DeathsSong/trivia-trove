@@ -44,6 +44,17 @@ header {
   header {
     font-size: 30px; /* Adjust the font size for smaller screens */
   }
+  .completion-text {
+    font-size: 45px;
+    margin-top: 100px;
+  }
+}
+
+@media (min-width: 601px) {
+  .completion-text {
+    font-size: 50px;
+  }
+  
 }
 
 header a {
@@ -94,14 +105,14 @@ header a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Add this line to center content vertically */
+  justify-content: center;
   margin-bottom: 60px;
 }
 
 .category-heading {
   text-align: center;
-  margin-bottom: 16px; /* Keep the existing bottom margin */
-  margin-top: -85px; /* Add top margin to move the heading closer to the header */
+  margin-bottom: 16px;
+  margin-top: -85px;
   font-family: 'Agbalumo';
   color: rgba(56, 32, 0, 0.666);
 }
@@ -188,14 +199,14 @@ header a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: -85px; /* Adjust as needed */
+  margin-top: -85px;
 }
 
 .question-text {
   text-align: center;
   font-family: 'Agbalumo';
   color: rgba(56, 32, 0, 0.666);
-  font-size: 30px; /* Adjust as needed */
+  font-size: 30px; 
   margin-bottom: 16px;
 }
 
@@ -204,7 +215,7 @@ header a {
   justify-content: center;
   flex-wrap: wrap; /* Allow items to wrap to the next line */
   gap: 16px;
-  margin-bottom: 20px; /* Adjust as needed */
+  margin-bottom: 20px; 
 }
 
 .answer-button {
@@ -223,7 +234,7 @@ header a {
   flex: 0 0 calc(50% - 16px); /* Set width for two buttons in a row with gap */
   cursor: pointer;
 
-  /* Add a media query for smaller screens (adjust max-width as needed) */
+  /* Add a media query for smaller screens */
   @media (max-width: 768px) {
     flex: 0 0 calc(100% - 16px); /* Set width for one button per row */
   }
@@ -238,7 +249,7 @@ header a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px; /* Adjust as needed */
+  margin-bottom: 20px;
 }
 
 .boolean-answer-button {
@@ -268,7 +279,7 @@ header a {
   text-align: center;
   font-family: 'Agbalumo';
   color: rgba(56, 32, 0, 0.666);
-  font-size: 30px; /* Adjust as needed */
+  font-size: 30px; 
   margin-top: 70px; /* Add space between the answers and the score */
 }
 
@@ -283,7 +294,7 @@ header a {
   border: 1px solid #ddd;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-  font-size: 20px; /* Adjust as needed */
+  font-size: 20px; 
   font-weight: bold;
   margin-top: 20px; /* Add space between the score and the button */
   cursor: pointer;
@@ -296,14 +307,14 @@ header a {
 .button-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px; 
   margin-bottom: 70px;
 }
 
 .loading-dots {
   font-family: 'Agbalumo';
   color: rgba(56, 32, 0, 0.666);
-  font-size: 24px; /* Adjust as needed */
+  font-size: 24px; 
   margin-top: 20px; /* Add space between the answers and the loading animation */
   animation: loadingAnimation 1.5s infinite; /* Add animation property */
 }
@@ -356,13 +367,12 @@ header a {
 
 .information-container {
   text-align: center;
-  margin-top: -415px; /* Adjust as needed */
+  margin-top: -415px;
 }
 
 .completion-text {
   font-family: 'Agbalumo';
   color: rgba(56, 32, 0, 0.666);
-  font-size: 50px;
   margin-bottom: 16px;
 }
 
@@ -424,7 +434,7 @@ header a {
 
 /* ------------------------------ Incorrect Questions Modal ------------------------------ */
 .incorrect-questions-modal {
-  display: block; /* or any other property to make it visible */
+  display: block; 
   position: fixed;
   z-index: 1;
   left: 0;

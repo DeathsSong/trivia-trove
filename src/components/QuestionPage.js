@@ -13,7 +13,7 @@ const QuestionPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const shuffleAnswers = (answers) => {
+  const shuffleAnswers = (answers) => { // Randomly shuffles answers
     const shuffledAnswers = [...answers];
     for (let i = shuffledAnswers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -41,7 +41,7 @@ const QuestionPage = () => {
     setQuestionResults((prevResults) => [...prevResults, result]);
   
     if (isCorrect) {
-      setScore((prevScore) => prevScore + 1);
+      setScore((prevScore) => prevScore + 1); // Add to score if question is answered correctly
     }
   
     if (currentQuestionIndex === questions.length - 1) {
@@ -54,11 +54,6 @@ const QuestionPage = () => {
     }
   };
   
-  
-  
-  
-  
-  // Add the following useEffect to handle navigation
   useEffect(() => {
     if (currentQuestionIndex === questions.length - 1) {
       navigate(`/trivia-trove/questions/${categoryId}/${difficulty}/complete`, {
@@ -67,10 +62,6 @@ const QuestionPage = () => {
     }
   }, [currentQuestionIndex, questions.length, categoryId, difficulty, score, questionResults]);
   
-  
-  
-  
-
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const fetchQuestions = async () => {
@@ -93,7 +84,7 @@ const QuestionPage = () => {
         if (question.type === 'multiple') {
           answers = shuffleAnswers([...question.incorrect_answers, question.correct_answer]);
         } else if (question.type === 'boolean') {
-          answers = shuffleAnswers(['True', 'False']);
+          answers = shuffleAnswers(['True', 'False']); // Shuffle the answers based on if they're multiple choice or boolean
         }
   
         return {
@@ -107,9 +98,6 @@ const QuestionPage = () => {
     } catch (error) {
     }
   };
-  
-  
-  
 
   useEffect(() => {
     fetchQuestions();
@@ -127,7 +115,8 @@ const QuestionPage = () => {
   
       {!loading && currentQuestion && (
         <div>
-          <p className="question-text" dangerouslySetInnerHTML={{ __html: currentQuestion.question }} />
+          {/* set HTML content from a variable or a dynamic source */}
+          <p className="question-text" dangerouslySetInnerHTML={{ __html: currentQuestion.question }} /> 
   
           {currentQuestion.type === 'multiple' && (
             <div className="answers-grid">
