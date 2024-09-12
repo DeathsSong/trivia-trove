@@ -25,3 +25,4 @@
 ### Notes
 
 - Open Trivia Database API: https://opentdb.com/
+- Link to App: https://deathssong.github.io/trivia-trove/
